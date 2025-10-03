@@ -1,0 +1,38 @@
+[
+  {
+    "icon": "Globe",
+    "title": "Desarrollo Web",
+    "description": "Aplicaciones web modernas y responsivas con React, Next.js y las últimas tecnologías.",
+    "accent": "primary"
+  },
+  {
+    "icon": "Smartphone",
+    "title": "Aplicaciones Móviles",
+    "description": "Apps móviles multiplataforma que funcionan en iOS y Android con una sola base de código.",
+    "accent": "accent"
+  },
+  {
+    "icon": "Database",
+    "title": "Bases de Datos",
+    "description": "Diseño e implementación de bases de datos escalables y optimizadas para tu negocio.",
+    "accent": "chart-3"
+  },
+  {
+    "icon": "Zap",
+    "title": "APIs & Integraciones",
+    "description": "Desarrollo de APIs REST y conexión con servicios externos para automatizar procesos.",
+    "accent": "chart-5"
+  },
+  {
+    "icon": "Shield",
+    "title": "Mantenimiento",
+    "description": "Soporte continuo, actualizaciones de seguridad y mejoras para tus aplicaciones.",
+    "accent": "chart-4"
+  },
+  {
+    "icon": "Wrench",
+    "title": "Consultoría IT",
+    "description": "Asesoramiento técnico para elegir las mejores soluciones tecnológicas para tu proyecto.",
+    "accent": "primary"
+  }
+]

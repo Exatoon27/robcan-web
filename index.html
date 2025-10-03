@@ -3,29 +3,335 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RobCan - WIP</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 50px;
-            background-image: url('background.png');
-            background-size: cover;
-            background-position: center center;
-            background-repeat: no-repeat;
-            height: 100vh;
-            
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+    <title>RobCan</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style type="text/tailwindcss">
 
-            color: #d9d9d9;
+        @custom-variant dark (&:is(.dark *));
+
+        :root {
+        --background: oklch(0.99 0 0);
+        --foreground: oklch(0.15 0 0);
+        --card: oklch(1 0 0);
+        --card-foreground: oklch(0.15 0 0);
+        --popover: oklch(1 0 0);
+        --popover-foreground: oklch(0.15 0 0);
+        --primary: oklch(0.55 0.18 250);
+        --primary-foreground: oklch(0.99 0 0);
+        --secondary: oklch(0.95 0.01 250);
+        --secondary-foreground: oklch(0.15 0 0);
+        --muted: oklch(0.96 0.005 250);
+        --muted-foreground: oklch(0.5 0.01 250);
+        --accent: oklch(0.65 0.2 40);
+        --accent-foreground: oklch(0.99 0 0);
+        --destructive: oklch(0.577 0.245 27.325);
+        --destructive-foreground: oklch(0.99 0 0);
+        --border: oklch(0.9 0.01 250);
+        --input: oklch(0.9 0.01 250);
+        --ring: oklch(0.55 0.18 250);
+        --chart-1: oklch(0.55 0.18 250);
+        --chart-2: oklch(0.65 0.2 40);
+        --chart-3: oklch(0.6 0.15 180);
+        --chart-4: oklch(0.7 0.18 300);
+        --chart-5: oklch(0.65 0.16 140);
+        --radius: 0.625rem;
+        --sidebar: oklch(0.985 0 0);
+        --sidebar-foreground: oklch(0.145 0 0);
+        --sidebar-primary: oklch(0.55 0.18 250);
+        --sidebar-primary-foreground: oklch(0.985 0 0);
+        --sidebar-accent: oklch(0.97 0 0);
+        --sidebar-accent-foreground: oklch(0.205 0 0);
+        --sidebar-border: oklch(0.922 0 0);
+        --sidebar-ring: oklch(0.708 0 0);
+        }
+
+        .dark {
+        --background: oklch(0.12 0.01 250);
+        --foreground: oklch(0.98 0 0);
+        --card: oklch(0.15 0.01 250);
+        --card-foreground: oklch(0.98 0 0);
+        --popover: oklch(0.15 0.01 250);
+        --popover-foreground: oklch(0.98 0 0);
+        --primary: oklch(0.65 0.2 250);
+        --primary-foreground: oklch(0.12 0.01 250);
+        --secondary: oklch(0.22 0.02 250);
+        --secondary-foreground: oklch(0.98 0 0);
+        --muted: oklch(0.22 0.02 250);
+        --muted-foreground: oklch(0.65 0.02 250);
+        --accent: oklch(0.7 0.22 40);
+        --accent-foreground: oklch(0.12 0.01 250);
+        --destructive: oklch(0.6 0.24 27);
+        --destructive-foreground: oklch(0.98 0 0);
+        --border: oklch(0.25 0.02 250);
+        --input: oklch(0.25 0.02 250);
+        --ring: oklch(0.65 0.2 250);
+        --chart-1: oklch(0.65 0.2 250);
+        --chart-2: oklch(0.7 0.22 40);
+        --chart-3: oklch(0.65 0.18 180);
+        --chart-4: oklch(0.75 0.2 300);
+        --chart-5: oklch(0.7 0.18 140);
+        --sidebar: oklch(0.15 0.01 250);
+        --sidebar-foreground: oklch(0.98 0 0);
+        --sidebar-primary: oklch(0.65 0.2 250);
+        --sidebar-primary-foreground: oklch(0.98 0 0);
+        --sidebar-accent: oklch(0.22 0.02 250);
+        --sidebar-accent-foreground: oklch(0.98 0 0);
+        --sidebar-border: oklch(0.25 0.02 250);
+        --sidebar-ring: oklch(0.65 0.2 250);
+        }
+
+        @theme inline {
+        --color-background: var(--background);
+        --color-foreground: var(--foreground);
+        --color-card: var(--card);
+        --color-card-foreground: var(--card-foreground);
+        --color-popover: var(--popover);
+        --color-popover-foreground: var(--popover-foreground);
+        --color-primary: var(--primary);
+        --color-primary-foreground: var(--primary-foreground);
+        --color-secondary: var(--secondary);
+        --color-secondary-foreground: var(--secondary-foreground);
+        --color-muted: var(--muted);
+        --color-muted-foreground: var(--muted-foreground);
+        --color-accent: var(--accent);
+        --color-accent-foreground: var(--accent-foreground);
+        --color-destructive: var(--destructive);
+        --color-destructive-foreground: var(--destructive-foreground);
+        --color-border: var(--border);
+        --color-input: var(--input);
+        --color-ring: var(--ring);
+        --color-chart-1: var(--chart-1);
+        --color-chart-2: var(--chart-2);
+        --color-chart-3: var(--chart-3);
+        --color-chart-4: var(--chart-4);
+        --color-chart-5: var(--chart-5);
+        --radius-sm: calc(var(--radius) - 4px);
+        --radius-md: calc(var(--radius) - 2px);
+        --radius-lg: var(--radius);
+        --radius-xl: calc(var(--radius) + 4px);
+        --color-sidebar: var(--sidebar);
+        --color-sidebar-foreground: var(--sidebar-foreground);
+        --color-sidebar-primary: var(--sidebar-primary);
+        --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+        --color-sidebar-accent: var(--sidebar-accent);
+        --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+        --color-sidebar-border: var(--sidebar-border);
+        --color-sidebar-ring: var(--sidebar-ring);
+        }
+
+        @layer base {
+        * {
+            @apply border-border outline-ring/50;
+        }
+        body {
+            @apply bg-background text-foreground;
+        }
         }
     </style>
 </head>
-<body>
-    <h1>RobCan - Work In Progress</h1>
-    <p>This project is currently under development. Please check back later for updates!</p>
+<body style="min-height: 100vh;">
+    <section id="hero" class="relative min-h-[90vh] flex items-center justify-center px-4 py-20">
+        <div class="max-w-4xl mx-auto text-center space-y-8">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm border border-primary/20">
+                <i data-lucide="code-xml" class="w-4 h-4"></i>
+                <span class="font-semibold">Roberto Cantú</span>
+                <span class="text-muted-foreground">•</span>
+                <span>Desarrollo de Software & Soluciones IT</span>
+            </div>
+
+            <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-balance">
+            Soluciones digitales <span class="text-primary">a tu medida</span>
+            </h1>
+
+            <p class="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
+            Desarrollo aplicaciones web y soluciones IT escalables para pequeñas y medianas empresas que buscan crecer en
+            el mundo digital.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
+            <a href="#services" class="flex items-center bg-primary text-primary-foreground py-2 px-4 rounded-md hover:bg-primary/80 gap-2 text-base">
+                Ver servicios
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+            <a
+                href="#contact"
+                class="border py-2 px-4 rounded-md text-base border-accent text-accent hover:bg-accent hover:rounded-md hover:text-accent-foreground bg-transparent"
+            >
+                Contactar
+            </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-24 px-4 bg-muted/30">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center space-y-4 mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Servicios</h2>
+          <p class="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
+            Ofrezco soluciones completas de desarrollo de software adaptadas a las necesidades de tu negocio
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="services-list"></div>
+    </section>
+
+    <section id="about" class="py-24 px-4">
+        <div class="max-w-5xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Sobre mí</h2>
+                    <div class="space-y-4 text-lg text-muted-foreground leading-relaxed">
+                        <p>
+                            Soy desarrollador de software independiente especializado en crear soluciones digitales para pequeñas y
+                            medianas empresas.
+                        </p>
+                        <p>
+                            Trabajo directamente contigo para entender tus necesidades y desarrollar aplicaciones que realmente
+                            aporten valor a tu negocio. Sin intermediarios, sin complicaciones.
+                        </p>
+                        <p>Mi objetivo es ayudarte a digitalizar y optimizar tus procesos con tecnología moderna y accesible.</p>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="flex gap-3 items-start">
+                        <i data-lucide="check-circle" class="w-6 h-6 text-accent flex-shrink-0 mt-0.5"></i>
+                        <span class="text-lg">Prácticamente toda una vida en desarrollo web</span>
+                    </div>
+                    <div class="flex gap-3 items-start">
+                        <i data-lucide="check-circle" class="w-6 h-6 text-accent flex-shrink-0 mt-0.5"></i>
+                        <span class="text-lg">Especializado en React, Next.js, PHP y Node.js</span>
+                    </div>
+                    <div class="flex gap-3 items-start">
+                        <i data-lucide="check-circle" class="w-6 h-6 text-accent flex-shrink-0 mt-0.5"></i>
+                        <span class="text-lg">Enfoque en código limpio y mantenible</span>
+                    </div>
+                    <div class="flex gap-3 items-start">
+                        <i data-lucide="check-circle" class="w-6 h-6 text-accent flex-shrink-0 mt-0.5"></i>
+                        <span class="text-lg">Comunicación directa y transparente</span>
+                    </div>
+                    <div class="flex gap-3 items-start">
+                        <i data-lucide="check-circle" class="w-6 h-6 text-accent flex-shrink-0 mt-0.5"></i>
+                        <span class="text-lg">Entregas puntuales y dentro del presupuesto</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="process" class="py-24 px-4 bg-muted/30">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center space-y-4 mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Cómo trabajo</h2>
+                <p class="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
+                    Un proceso simple y transparente de principio a fin
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="flex gap-6">
+                    <div class="text-5xl font-bold text-accent/20 flex-shrink-0">01</div>
+                    <div class="space-y-2 pt-2">
+                        <h3 class="text-xl font-semibold">Consulta inicial</h3>
+                        <p class="text-muted-foreground leading-relaxed">Conversamos sobre tu proyecto, objetivos y necesidades específicas.</p>
+                    </div>
+                </div>
+                <div class="flex gap-6">
+                    <div class="text-5xl font-bold text-accent/20 flex-shrink-0">02</div>
+                    <div class="space-y-2 pt-2">
+                        <h3 class="text-xl font-semibold">Propuesta</h3>
+                        <p class="text-muted-foreground leading-relaxed">Te presento una propuesta detallada con alcance, tiempos y presupuesto.</p>
+                    </div>
+                </div>
+                <div class="flex gap-6">
+                    <div class="text-5xl font-bold text-accent/20 flex-shrink-0">03</div>
+                    <div class="space-y-2 pt-2">
+                        <h3 class="text-xl font-semibold">Desarrollo</h3>
+                        <p class="text-muted-foreground leading-relaxed">Trabajo en tu proyecto con actualizaciones regulares y comunicación constante.</p>
+                    </div>
+                </div>
+                <div class="flex gap-6">
+                    <div class="text-5xl font-bold text-accent/20 flex-shrink-0">04</div>
+                    <div class="space-y-2 pt-2">
+                        <h3 class="text-xl font-semibold">Entrega y soporte</h3>
+                        <p class="text-muted-foreground leading-relaxed">Entrego el proyecto completo y ofrezco soporte para cualquier ajuste necesario.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-24 px-4">
+        <div class="max-w-3xl mx-auto">
+            <div class="bg-card text-card-foreground flex flex-col gap-6 rounded-xl py-6 shadow-sm border-2 border-border">
+                <div class="p-8 md:p-12 text-center space-y-6">
+                    <h2 class="text-3xl md:text-4xl font-bold tracking-tight">¿Listo para empezar?</h2>
+                    <p class="text-lg text-muted-foreground max-w-xl mx-auto text-pretty leading-relaxed">
+                    Cuéntame sobre tu proyecto y veamos cómo puedo ayudarte a hacerlo realidad
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+                    <a href="mailto:contact@robcan.me" class="flex items-center bg-primary text-primary-foreground py-2 px-4 rounded-md hover:bg-primary/80 gap-2">
+                        <i data-lucide="mail" class="w-4 h-4"></i>
+                        Enviar email
+                    </a>
+                    <a href="https://api.whatsapp.com/send?phone=5218112621601" class="flex items-center gap-2 py-2 px-4 rounded-md text-base border border-chart-5 text-chart-5 hover:bg-chart-5 hover:rounded-md hover:text-accent-foreground bg-transparent">
+                        <i data-lucide="message-square" class="w-4 h-4"></i>
+                        WhatsApp
+                    </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="border-t border-border py-12 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="code-xml" class="w-5 h-5 text-primary"></i>
+                    <span class="text-sm font-semibold text-foreground">Roberto Cantú</span>
+                    <span class="text-sm text-muted-foreground">
+                        Desarrollador de software & soluciones IT
+                    </span>
+                </div>
+                <div class="flex gap-6 text-sm text-muted-foreground">
+                    <a href="https://www.linkedin.com/in/roberto-carlos-cantu-gonzalez-1bb29b2b7/" class="hover:text-primary transition-colors">
+                        LinkedIn
+                    </a>
+                    <a href="https://github.com/exatoon27/" class="hover:text-primary transition-colors">
+                        GitHub
+                    </a>
+                    <a href="mailto:contact@robcan.me" class="hover:text-accent transition-colors">
+                        Email
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module">
+        import services from './services.json' with  { type: 'json' };
+
+        const servicesList = document.getElementById('services-list');
+
+        services.forEach(service => {
+            const serviceCard = document.createElement('div');
+            serviceCard.className = `px-6 bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm border-border hover:border-${service.accent}/50 transition-colors transition-shadow duration-300`;
+
+            serviceCard.innerHTML = `
+                <div class="flex items-center justify-center h-16 w-16 rounded-lg bg-${service.accent}/10 text-${service.accent} text-3xl">
+                    <i data-lucide="${service.icon}" class="w-6 h-6 ${service.accent}"></i>
+                </div>
+                <div class="space-y-2">
+                    <h3 class="text-lg font-semibold">${service.title}</h3>
+                    <p class="text-muted-foreground text-pretty">${service.description}</p>
+                </div>
+            `;
+            servicesList.appendChild(serviceCard);
+        });
+
+        lucide.createIcons();
+    </script>
 </body>
 </html>
